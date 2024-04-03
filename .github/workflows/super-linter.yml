@@ -7,6 +7,7 @@ on:
     branches: [ "master" ]
 jobs:
   run-lint:
+    name: Lint the code base
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,7 +22,10 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "master"
           GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }
+          
   docker:
+    name: Docker build and push
+    needs: run-lint
     runs-on: ubuntu-latest
     steps:
       -
